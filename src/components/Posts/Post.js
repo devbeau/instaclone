@@ -5,11 +5,14 @@ import PostHeader from './PostHeader';
 
 const Post = props => {
   // 🔥 Make sure the parent of Post is passing the right props!
-  const { post, likePost } = props;
-  console.log(post.filtered);
-  console.log("FUNC", likePost);
+  const { post, likePost} = props;
+
+  let postStyle = {
+    display: 'inline-block',
+  }
+
   return (
-    <div className='post-border' display={post.filtered ? 'none' : 'inline-block'}>
+    <div className='post-border' id ={'post'+post.id} style={postStyle}>
       <PostHeader
         username={post.username}
         thumbnailUrl={post.thumbnailUrl}

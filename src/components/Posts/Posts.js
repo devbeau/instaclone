@@ -1,13 +1,23 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import Post from './Post';
 import './Posts.css';
 
 const Posts = (props) => {
   // 🔥 Make sure the parent of Posts is passing the right props!
-  const { likePost, posts } = props;
+  const { likePost, posts, filtered } = props;
+ 
+
   
 const createPosts = posts => {
-  return posts.filter(post => post.filtered !== true).map(post => <Post post ={post} key={post.id} likePost={likePost} display={posts.filtered ? 'none' : 'inline-block'}/>)
+  // .filter(post => post.filtered !== true).
+  return posts.map(post => {
+    console.log(post.filtered);
+    return <Post 
+              post ={post} 
+              key={post.id} 
+              likePost={likePost} 
+            />
+  })
 }
 
   return (

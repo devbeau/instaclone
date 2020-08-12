@@ -5,7 +5,7 @@
 */
 
 // Import the state hook
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 // Import the Posts (plural!) and SearchBar components, since they are used inside App component
 import Posts from './components/Posts/Posts'
 import SearchBar from './components/SearchBar/SearchBar'
@@ -21,9 +21,17 @@ const App = () => {
   // This state is the source of truth for the data inside the app. You won't be needing dummyData anymore.
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
 
-  const searchPosts = (posts, searchValue) => {
+  useEffect(() => {
+    posts.forEach(post => {
+      let postDisplay = document.querySelector('#post'+post.id)
+      postDisplay.style.display = post.username.toLowerCase().startsWith(searchValue.toLowerCase())
+                    ? 'inline-block' 
+                    : 'none';
+    })
+    
+  })
 
-   
+  const searchPosts = (posts, searchValue) => {
     setPosts(posts.map(post => {
       // console.log("$%^&$%^&$%^&", post['name'], searchValue);
       if(!post.username.toLowerCase().startsWith(searchValue.toLowerCase())){
