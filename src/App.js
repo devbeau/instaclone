@@ -16,9 +16,33 @@ import './App.css';
 const App = () => {
   let [posts, setPosts] = useState(dummyData);
   let [searchValue, setSearchValue] = useState('');
+  let [isFiltered, setIsFiltered] = useState(false)
   // Create a state called `posts` to hold the array of post objects, **initializing to dummyData**.
   // This state is the source of truth for the data inside the app. You won't be needing dummyData anymore.
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
+
+  const searchPosts = (posts, searchValue) => {
+
+   
+    setPosts(posts.map(post => {
+      // console.log("$%^&$%^&$%^&", post['name'], searchValue);
+      if(!post.username.toLowerCase().startsWith(searchValue.toLowerCase())){
+        post.filtered = true;
+        if(isFiltered !== true){
+          
+        }
+        return post;
+      } else {
+        console.log(searchValue, post.username)
+        post.filtered = false;
+        return post;
+      }
+    }))
+      if (posts.reduce((a, c) => a || c.filtered ? c : false, false)){
+        setIsFiltered(true);
+      }
+      else setIsFiltered(false);
+  }
 
   const likePost = postId => {
     /*
@@ -46,8 +70,8 @@ const App = () => {
   return (
     <div className='App'>
       {/* Add SearchBar and Posts here to render them */}
-      <SearchBar posts={posts} searchValue={searchValue} setSearchValue={setSearchValue}/>
-      <Posts posts={posts} likePost={likePost}/>
+      <SearchBar posts={posts} searchValue={searchValue} setSearchValue={setSearchValue} searchPosts={searchPosts}/>
+      <Posts posts={posts} likePost={likePost} filtered={isFiltered}/>
       {/* Check the implementation of each component, to see what props they require, if any! */}
     </div>
   );

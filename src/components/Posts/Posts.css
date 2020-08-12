@@ -9,6 +9,7 @@
   align-items: center;
 }
 .post-header h2 {
+  display: inline-block;
   font-size: 14px;
   font-weight: bold;
 }
