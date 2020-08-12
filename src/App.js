@@ -23,8 +23,11 @@ const App = () => {
 
   useEffect(() => {
     posts.forEach(post => {
-      let postDisplay = document.querySelector('#post'+post.id)
-      postDisplay.style.display = post.username.toLowerCase().startsWith(searchValue.toLowerCase())
+      let postDisplay = document.querySelector('#post'+post.id);
+      let username = post.username.toLowerCase();
+      let search = searchValue.toLowerCase();
+
+      postDisplay.style.display = username.startsWith(search)
                     ? 'inline-block' 
                     : 'none';
     })
